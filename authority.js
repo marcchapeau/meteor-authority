@@ -2,4 +2,4 @@
 
 // Variables exported by this module can be imported by other packages and
 // applications. See authority-tests.js for an example of importing.
-export const name = 'authority';
+export const name = 'authority'
