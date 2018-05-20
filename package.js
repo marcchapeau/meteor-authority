@@ -8,8 +8,14 @@ Package.describe({
 
 Package.onUse(function (api) {
   api.versionsFrom('1.6.1.1')
+  api.use('accounts-base')
+  api.use('check')
   api.use('ecmascript')
-  api.mainModule('authority.js')
+  api.use('mongo')
+  api.use('templating')
+  api.use('tracker')
+  api.mainModule('server/main.js', 'server')
+  api.mainModule('client/main.js', 'client')
 })
 
 Package.onTest(function (api) {
