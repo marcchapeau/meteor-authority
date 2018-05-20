@@ -6,6 +6,7 @@ import Roles from 'meteor/chap:authority/imports/collections/Roles'
 import Users from 'meteor/chap:authority/imports/collections/Users'
 
 const Authority = {
+  separator: ',',
   sub: {},
   userIs (userId, roleName) {
     check(userId, String)
