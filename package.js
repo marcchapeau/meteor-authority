@@ -11,6 +11,7 @@ Package.onUse(function (api) {
   api.use('accounts-base')
   api.use('check')
   api.use('ecmascript')
+  api.use('meteor')
   api.use('mongo')
   api.use('templating')
   api.use('tracker')
@@ -21,6 +22,6 @@ Package.onUse(function (api) {
 Package.onTest(function (api) {
   api.use('ecmascript')
   api.use('tinytest')
-  api.use('authority')
+  api.use('chap:authority')
   api.mainModule('authority-tests.js')
 })
