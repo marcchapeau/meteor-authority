@@ -29,7 +29,7 @@ if (Meteor.isServer) {
     if (roleName.length === 0) {
       throw new Meteor.Error('Authority.createRole', 'Name is empty')
     }
-    const role = Roles.findOne({roleName})
+    const role = Roles.findOne({name: roleName})
     if (role) return false
     return Roles.insert({name: roleName, permissions: []})
   }
