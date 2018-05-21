@@ -24,39 +24,39 @@ const Authority = {
 }
 
 if (Meteor.isServer) {
-  Authority.createRole = function (name) {
-    check(name, String)
-    if (name.length === 0) {
+  Authority.createRole = function (roleName) {
+    check(roleName, String)
+    if (roleName.length === 0) {
       throw new Meteor.Error('Authority.createRole', 'Name is empty')
     }
-    const role = Roles.findOne({name})
+    const role = Roles.findOne({roleName})
     if (role) return false
-    return Roles.insert({name, permissions: []})
+    return Roles.insert({name: roleName, permissions: []})
   }
-  Authority.deleteRole = function (name) {
-    check(name, String)
-    const count = Users.find({roles: name}).count()
+  Authority.deleteRole = function (roleName) {
+    check(roleName, String)
+    const count = Users.find({roles: roleName}).count()
     if (count > 0) {
       throw new Meteor.Error('Authority.deleteRole', 'Role is in use')
     }
-    Roles.remove({name})
+    Roles.remove({name: roleName})
   }
-  Authority.createPermission = function (name) {
-    check(name, String)
-    if (name.length === 0) {
+  Authority.createPermission = function (permName) {
+    check(permName, String)
+    if (permName.length === 0) {
       throw new Meteor.Error('Authority.createPermission', 'Name is empty')
     }
-    const permission = Permissions.findOne({name})
+    const permission = Permissions.findOne({name: permName})
     if (permission) return false
-    return Permissions.insert({name})
+    return Permissions.insert({name: permName})
   }
-  Authority.deletePermission = function (name) {
-    check(name, String)
-    const count = Roles.find({permissions: name}).count()
+  Authority.deletePermission = function (permName) {
+    check(permName, String)
+    const count = Roles.find({permissions: permName}).count()
     if (count > 0) {
       throw new Meteor.Error('Authority.deletePermission', 'Permission is in use')
     }
-    Permissions.remove({name})
+    Permissions.remove({name: permName})
   }
   Authority.addUserToRole = function (userId, roleName) {
     check(userId, String)

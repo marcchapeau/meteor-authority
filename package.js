@@ -3,7 +3,7 @@ Package.describe({
   version: '1.0.0',
   summary: 'Roles and permissions package for Meteor',
   git: 'https://github.com/marcchapeau/meteor-authority.git',
-  documentation: null
+  documentation: 'README.md'
 })
 
 Package.onUse(function (api) {
