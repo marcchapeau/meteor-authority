@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor'
-import { check } from 'meteor/check'
+import { check, Match } from 'meteor/check'
 
 import Permissions from 'meteor/chap:authority/imports/collections/Permissions'
 import Roles from 'meteor/chap:authority/imports/collections/Roles'
@@ -9,14 +9,12 @@ const Authority = {
   separator: ',',
   sub: {},
   userIs (userId, roleName) {
-    check(userId, String)
-    check(roleName, String)
+    if (!Match.test(userId, String) || !Match.test(roleName, String)) return false
     const user = Users.findOne({_id: userId, roles: roleName})
     return !!user
   },
   userCan (userId, permName) {
-    check(userId, String)
-    check(permName, String)
+    if (!Match.test(userId, String) || !Match.test(permName, String)) return false
     const roles = Roles.find({permissions: permName}).map(r => r.name)
     const user = Users.findOne({_id: userId, roles: {$in: roles}})
     return !!user
