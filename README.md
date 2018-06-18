@@ -11,27 +11,27 @@ Add package:
 Use it:
 
 ```js
-Authority.createRole('webmaster')
+Authority.saveRole('webmaster')
 Authority.createPermission('users.create')
 Authority.addPermissionToRole('users.create', 'webmaster')
 Authority.addUserToRole(someUserId, 'webmaster')
-Authority.userId('admin')// false
-Authority.userIs('webmaster')// true
-Authority.userCan('users.create')// true
-Authority.userCan('users.delete')// false
+Authority.userIs(someUserId, 'admin')// return false
+Authority.userIs(someUserId, 'webmaster')// return true
+Authority.userCan(someUserId, 'users.create')// return true
+Authority.userCan(someUserId, 'users.delete')// return false
 ```
 
 ## API
 
-### Authority.createRole(roleName)
+### Authority.saveRole(roleName, [parentName])
 
-Create a new role (server only).
+Create or update a role (server only).
 
 ```js
-Authority.createRole('webmaster')
+Authority.saveRole('webmaster')
 ```
 
-### Authority.DeleteRole(roleName)
+### Authority.deleteRole(roleName)
 
 Delete a role (server only).
 
@@ -47,7 +47,7 @@ Create a new permission (server only).
 Authority.createPermission('users.create')
 ```
 
-### Authority.DeletePermission(permName)
+### Authority.deletePermission(permName)
 
 Delete a permission (server only).
 
@@ -85,6 +85,22 @@ Remove permission from a role (server only).
 
 ```js
 Authority.removePermissionFromRole('users.create', 'webmaster')
+```
+
+### Authority.getUserRoles(userId)
+
+Get roles for a user.
+
+```js
+Authority.getUserRoles(someUserId)
+```
+
+### Authority.getUserPermissions(userId)
+
+Get permissions for a user.
+
+```js
+Authority.getUserPermissions(someUserId)
 ```
 
 ### Authority.userIs(userId, roleName)

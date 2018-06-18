@@ -1,13 +1,13 @@
 Package.describe({
   name: 'chap:authority',
-  version: '1.0.3',
+  version: '1.0.4',
   summary: 'Roles and permissions package for Meteor',
   git: 'https://github.com/marcchapeau/meteor-authority.git',
   documentation: 'README.md'
 })
 
 Package.onUse(function (api) {
-  api.versionsFrom('1.6.1.1')
+  api.versionsFrom('1.7.0.1')
   api.use('accounts-base')
   api.use('check')
   api.use('ecmascript')
