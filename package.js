@@ -1,6 +1,6 @@
 Package.describe({
   name: 'chap:authority',
-  version: '1.0.4',
+  version: '1.1.0',
   summary: 'Roles and permissions package for Meteor',
   git: 'https://github.com/marcchapeau/meteor-authority.git',
   documentation: 'README.md'
