@@ -15,10 +15,10 @@ Authority.saveRole('webmaster')
 Authority.createPermission('users.create')
 Authority.addPermissionToRole('users.create', 'webmaster')
 Authority.addUserToRole(someUserId, 'webmaster')
-Authority.userIs(someUserId, 'admin')// return false
-Authority.userIs(someUserId, 'webmaster')// return true
-Authority.userCan(someUserId, 'users.create')// return true
-Authority.userCan(someUserId, 'users.delete')// return false
+Authority.userIs(someUserId, ['admin'])// return false
+Authority.userIs(someUserId, ['webmaster'])// return true
+Authority.userCan(someUserId, ['users.create'])// return true
+Authority.userCan(someUserId, ['users.delete'])// return false
 ```
 
 ## API
@@ -103,20 +103,20 @@ Get permissions for a user.
 Authority.getUserPermissions(someUserId)
 ```
 
-### Authority.userIs(userId, roleName)
+### Authority.userIs(userId, roles)
 
 Test if a user has a role.
 
 ```js
-Authority.userIs(Meteor.userId(), 'webmaster')
+Authority.userIs(Meteor.userId(), ['webmaster'])
 ```
 
-### Authority.userCan(userId, permName)
+### Authority.userCan(userId, permissions)
 
 Test if a user has permission to do something.
 
 ```js
-Authority.userCan(Meteor.userId(), 'users.create')
+Authority.userCan(Meteor.userId(), ['users.create'])
 ```
 
 ## Helpers
