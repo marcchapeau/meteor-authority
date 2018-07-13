@@ -13,7 +13,7 @@ Package.onUse(function (api) {
   api.use('ecmascript')
   api.use('meteor')
   api.use('mongo')
-  api.use('templating')
+  api.use('templating@1.3.2')
   api.use('tracker')
   api.mainModule('server/main.js', 'server')
   api.mainModule('client/main.js', 'client')
