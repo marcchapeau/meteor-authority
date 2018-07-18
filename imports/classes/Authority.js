@@ -9,7 +9,7 @@ class Authority {
   static get separator () { return ',' }
   static userIs (userId, roles) {
     if (!Match.test(userId, String) || !Match.test(roles, [String])) return false
-    const userRoles = Authority.getUserRoles(userId)
+    const userRoles = this.getUserRoles(userId)
     let res = false
     roles.forEach(roleName => {
       if (!res && userRoles.indexOf(roleName) !== -1) res = true
@@ -18,7 +18,7 @@ class Authority {
   }
   static userCan (userId, perms) {
     if (!Match.test(userId, String) || !Match.test(perms, [String])) return false
-    const userPerms = Authority.getUserPermissions(userId)
+    const userPerms = this.getUserPermissions(userId)
     let res = false
     perms.forEach(permName => {
       if (!res && userPerms.indexOf(permName) !== -1) res = true
@@ -37,6 +37,17 @@ class Authority {
     }
     return parents
   }
+  static getRoleChildren (roleName) {
+    let children = []
+    if (!Match.test(roleName, String)) return children
+    let test = [roleName]
+    while (test.length) {
+      const roles = Roles.find({parent: {$in: test}}).map(r => r.name)
+      children = children.concat(roles)
+      test = roles
+    }
+    return children
+  }
   static getUserRoles (userId) {
     const roles = []
     if (!Match.test(userId, String)) return roles
@@ -44,7 +55,7 @@ class Authority {
     if (!user || !user.roles) return roles
     user.roles.forEach(roleName => {
       if (roles.indexOf(roleName) === -1) roles.push(roleName)
-      Authority.getRoleParents(roleName).forEach(parentName => {
+      this.getRoleParents(roleName).forEach(parentName => {
         if (roles.indexOf(parentName) === -1) roles.push(parentName)
       })
     })
@@ -53,7 +64,7 @@ class Authority {
   static getUserPermissions (userId) {
     const perms = []
     if (!Match.test(userId, String)) return perms
-    Authority.getUserRoles(userId).forEach(roleName => {
+    this.getUserRoles(userId).forEach(roleName => {
       const role = Roles.findOne({name: roleName})
       if (role && role.permissions) {
         role.permissions.forEach(permName => {
